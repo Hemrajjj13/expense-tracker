@@ -24,7 +24,7 @@ const ExpenseForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.amount || !formData.date) return;
+    if (!formData.amount || Number(formData.amount) <= 0) return;
 
     dispatch(
       addExpense({
@@ -49,20 +49,25 @@ const ExpenseForm = () => {
   };
 
   return (
-    <>
+    <div className="bg-white shadow-md rounded-lg p-6 max-w-xl mx-auto">
+      <h2 className="text-xl font-semibold mb-4">Add Expense</h2>
+
       {success && (
-        <div className="text-green-600 mb-3">Expense added successfully!</div>
+        <div className="bg-green-100 text-green-700 px-3 py-2 rounded mb-4 text-sm">
+          Expense added successfully!
+        </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-3">
+      <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-2">
         {/* Amount */}
         <input
           type="number"
+          min={1}
           name="amount"
           placeholder="Amount"
           value={formData.amount}
           onChange={handleChange}
-          className="w-full border p-2 rounded"
+          className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
         {/* Category */}
@@ -70,7 +75,7 @@ const ExpenseForm = () => {
           name="category"
           value={formData.category}
           onChange={handleChange}
-          className="w-full border p-2 rounded"
+          className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option>Food</option>
           <option>Bills</option>
@@ -85,7 +90,7 @@ const ExpenseForm = () => {
           name="date"
           value={formData.date}
           onChange={handleChange}
-          className="w-full border p-2 rounded"
+          className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
         {/* Note */}
@@ -95,17 +100,17 @@ const ExpenseForm = () => {
           placeholder="Note (optional)"
           value={formData.note}
           onChange={handleChange}
-          className="w-full border p-2 rounded"
+          className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded w-full"
+          className="md:col-span-2 bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700 transition"
         >
           Add Expense
         </button>
       </form>
-    </>
+    </div>
   );
 };
 
