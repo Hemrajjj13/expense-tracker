@@ -39,7 +39,7 @@ const ExpenseForm = () => {
     setFormData({
       amount: "",
       category: "Food",
-      date: "",
+      date: new Date().toISOString().split("T")[0],
       note: "",
     });
 
